@@ -1,0 +1,52 @@
+{
+  "assignmentId": "m02-relational-model",
+  "commitSha": "ce05a6a5537c1e53e56b9be4ae276e3eb1d57b9b",
+  "commands": [
+    "make setup",
+    "make verify",
+    "make run",
+    "docker compose up -d postgres",
+    "npm install",
+    "npm run migrate",
+    "npm run seed",
+    "npm test"
+  ],
+  "results": {
+    "migrations": [
+      "001_init.sql",
+      "002_invariantes.sql"
+    ],
+    "idempotent": true,
+    "parameterizedQueries": "db/queries/consultas.sql",
+    "tests": [
+      "caso_normal",
+      "caso_limite_vacio",
+      "caso_limite_exceso",
+      "fallo_declarado"
+    ],
+    "testExecution": "pending_team_execution"
+  },
+  "model": {
+    "tables": [
+      "dispositivos",
+      "sensores",
+      "lecturas_telemetria"
+    ],
+    "constraints": [
+      "PK",
+      "FK sensores.dispositivo_id",
+      "FK lecturas_telemetria.sensor_id",
+      "NOT NULL",
+      "chk_sensor_rango",
+      "chk_dispositivo_nombre",
+      "chk_sensor_tipo"
+    ]
+  },
+  "assumptions": [
+    "Postgres local con Docker Compose como respaldo de AWS Academy.",
+    "Datos sinteticos del seed."
+  ],
+  "limitations": [
+    "Las pruebas requieren Postgres levantado; no se ejecutaron en esta maquina porque Docker no estaba activo."
+  ]
+}
