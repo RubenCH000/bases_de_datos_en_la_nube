@@ -1,0 +1,18 @@
+{
+  "hito": "M02",
+  "commit": "0e4c10a672f9fec23e4344214ae9c4470b44b142",
+  "invariantes": [
+    "sensores.valor_min < sensores.valor_max",
+    "trigger valida el rango de la lectura contra su sensor"
+  ],
+  "consultas_parametrizadas": [
+    "obtenerLecturasPorSensor",
+    "obtenerLecturasPorRangoFechas"
+  ],
+  "pruebas": [
+    "caso_normal",
+    "caso_vacio",
+    "caso_limite",
+    "fallo_declarado"
+  ]
+}
