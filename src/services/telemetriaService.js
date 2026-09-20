@@ -1,30 +1,47 @@
-const { pool } = require('../db/connection');
- 
-// aqui se checa el rango del sensor antes de guardar la lectura
+const { writerPool, readerPool } = require('../db/connection');
+
 async function insertarLectura(sensorId, valor) {
-  const { rows: sensor } = await pool.query(
-    'SELECT valor_min, valor_max FROM sensores WHERE id = $1',
-    [sensorId]
-  );
- 
-  const { valor_min: min, valor_max: max } = sensor[0];
-  if (valor < min || valor > max) {
-    throw new Error('valor fuera de rango para el sensor ' + sensorId);
+  try {
+    const { rows } = await writerPool.query(
+      `INSERT INTO lecturas_telemetria (sensor_id, valor)
+       VALUES ($1, $2)
+       RETURNING id`,
+      [sensorId, valor]
+    );
+
+    return { id: rows[0].id, sensor_id: sensorId, valor };
+  } catch (err) {
+    if (err.message && err.message.includes('fuera de rango')) {
+      throw new Error(err.message);
+    }
+    throw err;
   }
- 
-  const { rows } = await pool.query(
-    'INSERT INTO lecturas_telemetria (sensor_id, valor) VALUES ($1, $2) RETURNING id, sensor_id, valor',
-    [sensorId, valor]
-  );
-  return rows[0];
 }
- 
+
 async function obtenerLecturasPorSensor(sensorId) {
-  const { rows } = await pool.query(
-    'SELECT id, valor FROM lecturas_telemetria WHERE sensor_id = $1',
+  const { rows } = await readerPool.query(
+    `SELECT id, valor, capturado_en
+     FROM lecturas_telemetria
+     WHERE sensor_id = $1`,
     [sensorId]
   );
   return rows;
 }
- 
-module.exports = { insertarLectura, obtenerLecturasPorSensor };
+
+async function obtenerLecturasPorRangoFechas(sensorId, desde, hasta) {
+  const { rows } = await readerPool.query(
+    `SELECT id, valor, capturado_en
+     FROM lecturas_telemetria
+     WHERE sensor_id = $1
+       AND capturado_en BETWEEN $2 AND $3
+     ORDER BY capturado_en`,
+    [sensorId, desde, hasta]
+  );
+  return rows;
+}
+
+module.exports = {
+  insertarLectura,
+  obtenerLecturasPorSensor,
+  obtenerLecturasPorRangoFechas,
+};

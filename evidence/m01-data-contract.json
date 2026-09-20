@@ -1,6 +1,6 @@
 {
   "assignmentId": "m01-data-contract",
-  "commitSha": "REPLACE_AT_SUBMISSION",
+  "commitSha": "086a96a5394cce44d1053e2b254bc1b8cc95dde4",
   "commands": [
     "make setup",
     "make verify",
@@ -10,12 +10,23 @@
     "starterBase": "pending_team_execution"
   },
   "assumptions": [
-    "El equipo elegir√° y documentar√° el lenguaje de la aplicaci√≥n.",
-    "AWS Academy Learner Lab se usar√° solo si el servicio est√° habilitado.",
-    "Los datos iniciales ser√°n sint√©ticos."
+    "El equipo elegir· y documentar· el lenguaje de la aplicaciÛn.",
+    "AWS Academy Learner Lab se usar· solo si el servicio est· habilitado.",
+    "Los datos iniciales ser·n sintÈticos."
   ],
   "limitations": [
-    "La base inicial no es una implementaci√≥n completa de M01.",
+    "La base inicial no es una implementaciÛn completa de M01.",
     "La imagen local de DynamoDB debe fijarse y reportarse cuando el equipo la use."
+  ],
+  "entidades": [
+    "dispositivos",
+    "sensores",
+    "lecturas_telemetria"
+  ],
+  "pruebas": [
+    "caso_normal",
+    "caso_limite_vacio",
+    "caso_limite_exceso",
+    "fallo_declarado"
   ]
 }

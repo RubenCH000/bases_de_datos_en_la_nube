@@ -32,3 +32,12 @@ El hito M01 transforma esta base en un contrato de datos ejecutable: agrega el e
 ## Entrega de cada hito
 
 En Classroom entrega el repositorio propio del equipo, el tag semanal solicitado, el SHA exacto y el reporte de `make verify`. El repositorio debe conservar el historial y la evidencia de participación técnica de cada integrante.
+
+## Levantar el proyecto
+
+docker compose up -d postgres
+npm install
+npm run migrate
+npm run seed
+npm test
+node scripts/generar_evidencia.js

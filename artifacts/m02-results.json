@@ -1,0 +1,19 @@
+{
+  "assignmentId": "m02-relational-model",
+  "commitSha": "ce05a6a5537c1e53e56b9be4ae276e3eb1d57b9b",
+  "results": {
+    "migrations": [
+      "001_init.sql",
+      "002_invariantes.sql"
+    ],
+    "idempotent": true,
+    "parameterizedQueries": "db/queries/consultas.sql",
+    "tests": [
+      "caso_normal",
+      "caso_limite_vacio",
+      "caso_limite_exceso",
+      "fallo_declarado"
+    ],
+    "testExecution": "pending_team_execution"
+  }
+}

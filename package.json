@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "migrate": "node src/db/migrate.js",
+        "migrate:bootstrap": "DB_ROLE=ADMIN node src/db/migrate.js",
+        "roles": "node scripts/configurar_roles.js",
+        "migrate": "DB_ROLE=MIGRATOR node src/db/migrate.js",
         "seed": "node db/seed/seed.js",
         "test": "node --test tests/"
     },

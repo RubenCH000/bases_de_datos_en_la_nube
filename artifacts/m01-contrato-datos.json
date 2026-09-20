@@ -1,0 +1,15 @@
+{
+  "hito": "M01",
+  "commit": "086a96a5394cce44d1053e2b254bc1b8cc95dde4",
+  "entidades": [
+    "dispositivos",
+    "sensores",
+    "lecturas_telemetria"
+  ],
+  "pruebas": [
+    "caso_normal",
+    "caso_limite_vacio",
+    "caso_limite_exceso",
+    "fallo_declarado"
+  ]
+}
