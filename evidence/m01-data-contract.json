@@ -10,12 +10,12 @@
     "starterBase": "pending_team_execution"
   },
   "assumptions": [
-    "El equipo elegir· y documentar· el lenguaje de la aplicaciÛn.",
-    "AWS Academy Learner Lab se usar· solo si el servicio est· habilitado.",
-    "Los datos iniciales ser·n sintÈticos."
+    "El equipo elegir√° y documentar√° el lenguaje de la aplicaci√≥n.",
+    "AWS Academy Learner Lab se usar√° solo si el servicio est√° habilitado.",
+    "Los datos iniciales ser√°n sint√©ticos."
   ],
   "limitations": [
-    "La base inicial no es una implementaciÛn completa de M01.",
+    "La base inicial no es una implementaci√≥n completa de M01.",
     "La imagen local de DynamoDB debe fijarse y reportarse cuando el equipo la use."
   ],
   "entidades": [
