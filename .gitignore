@@ -10,3 +10,4 @@ evidence/*-local.json
 db/data/
 docker-data/
 .DS_Store
+!artifacts/m03-security.json
