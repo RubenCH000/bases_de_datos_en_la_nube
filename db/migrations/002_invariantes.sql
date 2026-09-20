@@ -17,7 +17,7 @@ DECLARE
   maximo NUMERIC;
 BEGIN
   SELECT valor_min, valor_max INTO minimo, maximo
-  FROM sensores WHERE id = NEW.sensor_id;­
+  FROM sensores WHERE id = NEW.sensor_id;
  
   IF NEW.valor < minimo OR NEW.valor > maximo THEN
     RAISE EXCEPTION 'valor fuera de rango para el sensor %', NEW.sensor_id;
