@@ -1,0 +1,29 @@
+{
+  "assignmentId": "M04-pruebas-nosql",
+  "sourceCommitSha": "dd9c14e6582800e5cd9cdaa9ef0600a7eeb21cbc",
+  "storeUnderTest": "ColumnStoreMock (src/db/columnStoreMock.js)",
+  "pruebas": [
+    "m04_caso_normal",
+    "m04_caso_limite_vacio",
+    "m04_caso_limite_exceso",
+    "m04_fallo_declarado"
+  ],
+  "commands": [
+    "node --test tests/m04_caso_normal.test.js tests/m04_caso_limite_vacio.test.js tests/m04_caso_limite_exceso.test.js tests/m04_fallo_declarado.test.js"
+  ],
+  "results": {
+    "casoNormal": "passed",
+    "casoLimiteVacio": "passed",
+    "casoLimiteExceso": "passed",
+    "falloDeclarado": "passed"
+  },
+  "assumptions": [
+    "El store bajo prueba es un mock en memoria (Column Store), sin dependencia de Cassandra real ni de Docker.",
+    "Los fixtures sinteticos vienen de src/db/cdrlFixtures.js."
+  ],
+  "limitations": [
+    "El mock no deduplica eventos: insertar el mismo lote dos veces acumula registros en lugar de rechazarlos (ver m04_caso_limite_exceso).",
+    "La matriz comparativa (scripts/calcular_matriz_m04.js) puntua mejor a document/DynamoDB que a Column Store; falta el ADR que reconcilie esa diferencia con la implementacion elegida."
+  ],
+  "generatedAt": "2026-09-28T01:03:38.819Z"
+}
