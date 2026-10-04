@@ -17,6 +17,8 @@ services:
 
   dynamodb:
     image: amazon/dynamodb-local:latest
+    # El volumen se crea como root; sin esto DynamoDB Local no puede abrir su base.
+    user: root
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data"
     ports:
       - "${DYNAMODB_PORT:-8000}:8000"
