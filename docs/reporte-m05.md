@@ -93,7 +93,7 @@ make run
 
 ## Resultados
 
-Esta sección se completará después de integrar las pruebas y ejecutar `make verify`.
+La ejecución de `make verify` finalizó correctamente con 18 pruebas aprobadas y 0 fallidas. Se comprobaron el caso normal, el evento duplicado, el evento inexistente y el rechazo de documentos inválidos. Los resultados quedaron guardados en `artifacts/` y `evidence/`.
 
 ## Limitaciones
 

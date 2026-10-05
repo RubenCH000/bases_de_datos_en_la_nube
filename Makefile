@@ -18,6 +18,7 @@ verify:
 	@bash scripts/check_no_secrets.sh
 	@npm test
 	@node scripts/generar_evidencia_m03.js
+	@node scripts/generar_evidencia_m05.js
 	@echo "M05 verificado"
 
 run:

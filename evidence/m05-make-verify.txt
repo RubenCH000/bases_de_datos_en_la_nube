@@ -1,0 +1,39 @@
+CDRL starter base verification passed
+revisando secretos versionados...
+passwords de .env.example estan vacios
+sin secretos detectados en el arbol versionado
+
+> cdrl-telemetria@1.0.0 test
+> node --test tests/*.test.js
+
+[32m✔ caso limite: varias lecturas seguidas del mismo sensor [90m(133.182438ms)[39m[39m
+[32m✔ caso limite: un sensor sin lecturas regresa vacio, no error [90m(51.95565ms)[39m[39m
+[32m✔ caso normal: inserta una lectura valida y se puede consultar [90m(70.142279ms)[39m[39m
+[32m✔ fallo declarado: un valor fuera de rango se rechaza [90m(44.360483ms)[39m[39m
+[32m✔ M03 normal: writer inserta y reader consulta [90m(71.772949ms)[39m[39m
+[32m✔ M03 migrator puede modificar estructura [90m(11.707039ms)[39m[39m
+[32m✔ M03 operator puede hacer health check [90m(7.290037ms)[39m[39m
+[32m✔ acceso denegado: reader no puede insertar [90m(3.631872ms)[39m[39m
+[32m✔ acceso denegado: writer no puede borrar [90m(4.077993ms)[39m[39m
+[32m✔ acceso denegado: operator no puede leer telemetria [90m(1.885853ms)[39m[39m
+[32m✔ M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica [90m(2.13727ms)[39m[39m
+[32m✔ M04 caso limite: insertar un lote vacio no agrega registros ni truena [90m(1.012041ms)[39m[39m
+[32m✔ M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica [90m(0.874521ms)[39m[39m
+[32m✔ M04 fallo declarado: la conexion simulada caida rechaza la insercion [90m(1.329587ms)[39m[39m
+▶ M05 - Pruebas de Almacén Documental (DynamoDB)
+  [32m✔ 1. Caso normal: inserta un documento válido en el almacén [90m(131.9391ms)[39m[39m
+  [32m✔ 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto [90m(48.003117ms)[39m[39m
+  [32m✔ 3. Evento que no existe: retorna nulo al buscar por ID [90m(5.365879ms)[39m[39m
+  [32m✔ 4. Fallo declarado: rechaza un documento inválido [90m(0.428438ms)[39m[39m
+[32m✔ M05 - Pruebas de Almacén Documental (DynamoDB) [90m(186.598599ms)[39m[39m
+[34mℹ tests 18[39m
+[34mℹ suites 1[39m
+[34mℹ pass 18[39m
+[34mℹ fail 0[39m
+[34mℹ cancelled 0[39m
+[34mℹ skipped 0[39m
+[34mℹ todo 0[39m
+[34mℹ duration_ms 10220.913767[39m
+evidencia M03 generada para 4d410128f444c80bb69e58a8f305571c7b8140a4
+[OK] Evidencia JSON generada en artifacts/m05-resultados.json y evidence/m05-pruebas.json
+M05 verificado
