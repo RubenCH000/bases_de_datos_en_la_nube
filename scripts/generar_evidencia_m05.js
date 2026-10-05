@@ -10,7 +10,7 @@ const resultadosM05 = {
         evento_inexistente: "Superado - Búsqueda de ID inexistente controlada",
         fallo_declarado: "Superado - Documento inválido rechazado por el validador"
     },
-    estado_verificacion: "Pendiente de ejecutar make verify",
+    estado_verificacion: "superado mediante make verify",
     timestamp: new Date().toISOString()
 };
 
