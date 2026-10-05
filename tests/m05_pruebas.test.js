@@ -1,8 +1,10 @@
+const { describe, test } = require('node:test');
+const assert = require('node:assert/strict');
 const { guardarEvento, obtenerEvento, EventoDuplicadoError, EventoInvalidoError } = require('../src/db/documentStore');
 const { validarEvento } = require('../src/db/eventoValidador');
 
 describe('M05 - Pruebas de Almacén Documental (DynamoDB)', () => {
-    // Generamos un timestamp base para evitar colisiones en ejecuciones consecutivas
+    // Generamos un timestamp base para evitar colisiones en la base de datos
     const ts = Date.now();
 
     test('1. Caso normal: inserta un documento válido en el almacén', async () => {
@@ -15,11 +17,11 @@ describe('M05 - Pruebas de Almacén Documental (DynamoDB)', () => {
         };
 
         const { valido } = validarEvento(eventoValido);
-        expect(valido).toBe(true);
+        assert.equal(valido, true);
 
         const resultado = await guardarEvento(eventoValido);
-        expect(resultado.creado).toBe(true);
-        expect(resultado.duplicado).toBe(false);
+        assert.equal(resultado.creado, true);
+        assert.equal(resultado.duplicado, false);
     });
 
     test('2. Caso duplicado: lanza error al insertar un event_id con contenido distinto', async () => {
@@ -34,34 +36,38 @@ describe('M05 - Pruebas de Almacén Documental (DynamoDB)', () => {
 
         const eventoDistinto = {
             ...evento1,
-            metric_value: 10.0 // Contenido distinto para forzar el EventoDuplicadoError
+            metric_value: 10.0 // Valor alterado
         };
 
-        // Primera inserción exitosa
+        // Primera inserción
         await guardarEvento(evento1);
 
-        // Segunda inserción lanza el error personalizado de Ángeles
-        await expect(guardarEvento(eventoDistinto)).rejects.toThrow(EventoDuplicadoError);
+        // Segunda inserción debe rechazar con EventoDuplicadoError
+        await assert.rejects(
+            async () => await guardarEvento(eventoDistinto),
+            EventoDuplicadoError
+        );
     });
 
     test('3. Evento que no existe: retorna nulo al buscar por ID', async () => {
         const resultado = await obtenerEvento(`evt_inexistente_${ts}`);
-        expect(resultado).toBeNull();
+        assert.equal(resultado, null);
     });
 
     test('4. Fallo declarado: rechaza un documento inválido', async () => {
         const eventoInvalido = {
-            event_id: 'formato-incorrecto', // No cumple la regex evt_
-            metric_name: 'presion',         // No está en METRICAS_PERMITIDAS
-            metric_value: 'no-es-numero'    // Tipo de dato incorrecto
-            // Faltan campos requeridos como device_id y timestamp
+            event_id: 'formato-incorrecto', 
+            metric_name: 'presion',         
+            metric_value: 'no-es-numero'    
         };
 
         const { valido, errores } = validarEvento(eventoInvalido);
-        expect(valido).toBe(false);
-        expect(errores.length).toBeGreaterThan(0);
+        assert.equal(valido, false);
+        assert.ok(errores.length > 0);
 
-        // Al intentar guardarlo, debe rechazarlo inmediatamente
-        await expect(guardarEvento(eventoInvalido)).rejects.toThrow(EventoInvalidoError);
+        await assert.rejects(
+            async () => await guardarEvento(eventoInvalido),
+            EventoInvalidoError
+        );
     });
 });
