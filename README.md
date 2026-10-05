@@ -41,3 +41,22 @@ npm run migrate
 npm run seed
 npm test
 node scripts/generar_evidencia.js
+
+## M05 Almacén documental
+
+M05 utiliza DynamoDB como almacén documental para los eventos CDRL.
+
+La tabla `cdrl_eventos` utiliza `event_id` como clave principal.
+
+Los índices disponibles son:
+
+- `gsi_device_timestamp` para consultar por dispositivo y tiempo.
+- `gsi_metric_timestamp` para consultar por métrica y tiempo.
+
+DynamoDB Local se ejecuta en el puerto 8000.
+
+```bash
+make setup
+make verify
+make run
+```
