@@ -12,6 +12,7 @@ const {
 } = require('@aws-sdk/lib-dynamodb');
 const config = require('./nosqlConfig');
 const { validarEvento, EventoInvalidoError } = require('./eventoValidador');
+const { normalizarEvento, normalizarEventos } = require('./eventoLector');
 
 const TABLA = config.table;
 
@@ -48,8 +49,11 @@ const clienteBase = new DynamoDBClient({
 
 const cliente = DynamoDBDocumentClient.from(clienteBase);
 
+// Se comparan las formas normalizadas para que un reintento v1 y uno v2 se distingan.
 function mismoContenido(a, b) {
-    return ['event_id', 'device_id', 'timestamp', 'metric_name', 'metric_value'].every((campo) => a[campo] === b[campo]);
+    const na = normalizarEvento(a);
+    const nb = normalizarEvento(b);
+    return Object.keys(na).every((campo) => na[campo] === nb[campo]);
 }
 
 async function guardarEvento(evento) {
@@ -86,6 +90,11 @@ async function obtenerEvento(eventId) {
         ConsistentRead: true,
     }));
     return respuesta.Item || null;
+}
+
+// Lectura para la aplicación: siempre devuelve la forma de la versión actual (M06).
+async function obtenerEventoNormalizado(eventId) {
+    return normalizarEvento(await obtenerEvento(eventId));
 }
 
 async function actualizarValor(eventId, metricValue) {
@@ -142,6 +151,10 @@ function consultarPorMetrica(metricName, { desde = 0, hasta = Number.MAX_SAFE_IN
     return consultarPorIndice(INDICES.porMetrica, 'metric_name', metricName, desde, hasta);
 }
 
+async function consultarPorDispositivoNormalizado(deviceId, rango) {
+    return normalizarEventos(await consultarPorDispositivo(deviceId, rango));
+}
+
 module.exports = {
     TABLA,
     INDICES,
@@ -149,10 +162,12 @@ module.exports = {
     cliente,
     guardarEvento,
     obtenerEvento,
+    obtenerEventoNormalizado,
     actualizarValor,
     eliminarEvento,
     consultarPorDispositivo,
     consultarPorMetrica,
+    consultarPorDispositivoNormalizado,
     EventoDuplicadoError,
     EventoInvalidoError,
 };
