@@ -1,0 +1,30 @@
+{
+  "assignmentId": "M06-auditoria-recuperacion",
+  "total_registros": 3,
+  "registros": [
+    {
+      "actor": "ruben-m06",
+      "accion": "respaldo_fixture_controlado",
+      "fecha": "2026-10-10T15:32:57.777Z",
+      "audit_id": "audit_8367c211-daeb-4131-8c7f-4d5115697d30",
+      "documentos_afectados": 4,
+      "resultado": "exito"
+    },
+    {
+      "actor": "ruben-m06",
+      "accion": "borrado_controlado",
+      "fecha": "2026-10-10T15:32:57.877Z",
+      "audit_id": "audit_ab1626e4-0f64-4521-89e4-4b0b8f6e2a47",
+      "documentos_afectados": 4,
+      "resultado": "exito"
+    },
+    {
+      "actor": "ruben-m06",
+      "accion": "restauracion_controlada",
+      "fecha": "2026-10-10T15:32:57.974Z",
+      "audit_id": "audit_b67a044d-f574-4705-bf3b-ddeb31f14c61",
+      "documentos_afectados": 4,
+      "resultado": "exito"
+    }
+  ]
+}

@@ -11,7 +11,8 @@ setup:
 	@npm run migrate
 	@npm run seed
 	@npm run m05:tabla
-	@echo "M05 preparado"
+	@npm run m06:tabla-audit
+	@echo "M06 preparado"
 
 verify:
 	@bash scripts/verify_base.sh
@@ -19,7 +20,8 @@ verify:
 	@npm test
 	@node scripts/generar_evidencia_m03.js
 	@node scripts/generar_evidencia_m05.js
-	@echo "M05 verificado"
+	@npm run m06:recuperacion
+	@echo "M06 verificado"
 
 run:
 	@docker compose up
