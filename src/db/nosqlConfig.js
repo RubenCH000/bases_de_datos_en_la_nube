@@ -11,6 +11,7 @@ const nosqlConfig = {
     endpoint: process.env.DYNAMODB_ENDPOINT || `http://${host}:${port}`,
     region: process.env.AWS_REGION || 'us-east-1',
     table: process.env.DYNAMODB_TABLE || 'cdrl_eventos',
+    auditTable: process.env.DYNAMODB_AUDIT_TABLE || 'audit_log',
     // Se conserva para el prototipo columnar de M04.
     keyspace: process.env.NOSQL_KEYSPACE || 'telemetry_cdrl',
 };

@@ -105,8 +105,16 @@ Se descartó migrar todos los documentos v1 a v2 con un script. Habría que escr
 
 ## Auditoría
 
-Sección a cargo de la parte de auditoría y recuperación del equipo.
+Se utiliza una tabla independiente de DynamoDB llamada `audit_log`. Separar la auditoría de `cdrl_eventos` evita mezclar eventos de telemetría con registros operativos.
 
-## Recuperación ante falla controlada
+Cada registro contiene:
 
-Sección a cargo de la parte de auditoría y recuperación del equipo.
+```json
+{
+  "audit_id": "audit_uuid",
+  "actor": "ruben-m06",
+  "accion": "respaldo_fixture_controlado",
+  "fecha": "2026-10-10T15:00:00.000Z",
+  "documentos_afectados": 4,
+  "resultado": "exito"
+}

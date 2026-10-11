@@ -1,0 +1,14 @@
+{
+  "assignmentId": "M06-auditoria-recuperacion",
+  "tabla": "cdrl_eventos",
+  "tabla_auditoria": "audit_log",
+  "actor": "ruben-m06",
+  "fecha_inicio": "2026-10-10T15:32:57.694Z",
+  "fecha_fin": "2026-10-10T15:32:57.991Z",
+  "respaldados": 4,
+  "eliminados": 4,
+  "recuperados": 4,
+  "faltantes": [],
+  "tiempo_ms": 297,
+  "resultado": "exito"
+}

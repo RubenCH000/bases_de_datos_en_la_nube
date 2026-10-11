@@ -1,0 +1,42 @@
+{
+  "assignmentId": "M06-auditoria-recuperacion",
+  "tabla": "cdrl_eventos",
+  "fecha": "2026-10-10T15:32:57.776Z",
+  "total_documentos": 4,
+  "documentos": [
+    {
+      "metric_value": 44.5,
+      "event_id": "evt_m06_rec_001",
+      "device_id": "NODE-CDRL-REC1",
+      "metric_name": "cpu_temperature",
+      "timestamp": 1790000001000
+    },
+    {
+      "metric_value": 12.4,
+      "event_id": "evt_m06_rec_002",
+      "device_id": "NODE-CDRL-REC1",
+      "metric_name": "battery_voltage",
+      "timestamp": 1790000002000
+    },
+    {
+      "schema_version": 2,
+      "event_id": "evt_m06_rec_003",
+      "device_id": "NODE-CDRL-REC2",
+      "metric_name": "cpu_temperature",
+      "quality_score": 0.96,
+      "metric_value": 47.8,
+      "firmware_version": "2.1.0",
+      "timestamp": 1790000003000
+    },
+    {
+      "schema_version": 2,
+      "event_id": "evt_m06_rec_004",
+      "device_id": "NODE-CDRL-REC2",
+      "metric_name": "battery_voltage",
+      "quality_score": 0.91,
+      "metric_value": 12.1,
+      "firmware_version": "2.1.0",
+      "timestamp": 1790000004000
+    }
+  ]
+}

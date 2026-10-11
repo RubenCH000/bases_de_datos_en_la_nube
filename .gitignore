@@ -11,3 +11,7 @@ db/data/
 docker-data/
 .DS_Store
 !artifacts/m03-security.json
+
+!artifacts/m06-respaldo.json
+!artifacts/m06-recuperacion.json
+!artifacts/m06-auditoria.json

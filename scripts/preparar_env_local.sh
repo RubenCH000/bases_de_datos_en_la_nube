@@ -28,6 +28,9 @@ OPERATOR_PASSWORD=$(secreto)
  
 DYNAMODB_PORT=8000
 AWS_REGION=us-east-1
+DYNAMODB_AUDIT_TABLE=audit_log
+AUDIT_ACTOR=ruben-m06
+
 EOF
  
 chmod 600 .env
