@@ -1,0 +1,13 @@
+{
+  "modulo": "M06 - Auditoría y Recuperación",
+  "autor": "David",
+  "fecha": "2026-10-11T23:48:11.426Z",
+  "estado_verificacion": "superado mediante make verify",
+  "pruebas_ejecutadas": [
+    "1. Caso normal: registra exitosamente una acción en el audit_log",
+    "2. Caso límite 1: registra auditoría con metadatos vacíos",
+    "3. Caso límite 2: maneja campos de auditoría extremadamente largos",
+    "4. Fallo declarado: rechaza registrar auditoría si falta el actor"
+  ],
+  "resultado_global": "PASS"
+}
