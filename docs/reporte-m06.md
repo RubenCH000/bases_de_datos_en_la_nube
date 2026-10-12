@@ -62,3 +62,47 @@ El proceso genera los siguientes archivos:
 artifacts/m06-respaldo.json
 artifacts/m06-recuperacion.json
 artifacts/m06-auditoria.json
+```
+
+## Resultados
+
+La ejecución de la falla controlada terminó correctamente.
+
+Se respaldaron cuatro documentos sintéticos, después se eliminaron los mismos cuatro documentos y finalmente se restauraron desde el respaldo.
+
+Los resultados obtenidos fueron:
+
+- Documentos respaldados: 4.
+- Documentos eliminados: 4.
+- Documentos recuperados: 4.
+- Documentos faltantes: 0.
+- Tiempo de recuperación: registrado en `artifacts/m06-recuperacion.json`.
+- Resultado final: `exito`.
+
+Los resultados completos quedaron guardados en `artifacts/m06-recuperacion.json`.
+
+## Ejecución
+
+La preparación y la verificación se realizan con:
+
+```bash
+make setup
+make verify
+make run
+```
+
+`make setup` prepara PostgreSQL, DynamoDB Local y las tablas necesarias. `make verify` ejecuta las pruebas y genera las evidencias. `make run` inicia la aplicación.
+
+## Limitaciones
+
+- La recuperación se probó con DynamoDB Local.
+- Se utilizaron cuatro documentos sintéticos.
+- No se realizaron pruebas con carga de producción.
+- El tiempo de recuperación depende del equipo donde se ejecuta.
+- La tabla de auditoría no sustituye un servicio administrado de monitoreo.
+
+## Conclusión
+
+M06 permite que los eventos versión 1 y versión 2 convivan mediante un lector normalizado. También incorpora auditoría y un procedimiento controlado de respaldo, eliminación y restauración sin guardar información sensible.
+
+La prueba recuperó los cuatro documentos y no dejó eventos faltantes.

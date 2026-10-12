@@ -118,3 +118,48 @@ Cada registro contiene:
   "documentos_afectados": 4,
   "resultado": "exito"
 }
+```
+
+`audit_id` es la clave principal y utiliza un UUID para evitar colisiones.
+
+Durante la recuperación se registran estas acciones:
+
+- Respaldo de los fixtures.
+- Borrado controlado.
+- Restauración de los documentos.
+- Fallo del procedimiento, cuando ocurre un error.
+
+El campo `actor` se configura mediante `AUDIT_ACTOR`. No es una credencial y únicamente identifica quién ejecutó la operación.
+
+La auditoría no guarda contraseñas, tokens, cadenas de conexión ni documentos completos. Solamente registra la acción, fecha, cantidad de documentos afectados y resultado.
+
+La tabla se crea con `scripts/crear_tabla_audit_m06.js`. Su creación es idempotente.
+
+## Recuperación ante falla controlada
+
+La recuperación se implementa en `scripts/falla_controlada_m06.js` con cuatro documentos sintéticos.
+
+El procedimiento realiza lo siguiente:
+
+1. Prepara los fixtures.
+2. Guarda el respaldo en `artifacts/m06-respaldo.json`.
+3. Registra el respaldo en `audit_log`.
+4. Elimina solamente los documentos respaldados.
+5. Registra el borrado controlado.
+6. Restaura los documentos.
+7. Verifica cada `event_id`.
+8. Cuenta recuperados y faltantes.
+9. Mide el tiempo total.
+10. Guarda los resultados machine-readable.
+
+Los archivos generados son:
+
+- `artifacts/m06-respaldo.json`
+- `artifacts/m06-recuperacion.json`
+- `artifacts/m06-auditoria.json`
+
+La recuperación es exitosa cuando los cuatro documentos vuelven a estar disponibles y el número de faltantes es cero.
+
+Si ocurre un error después de crear el respaldo, el script intenta restaurar nuevamente los documentos. En los artifacts solamente se guarda el tipo de error para evitar exponer información sensible.
+
+La prueba utiliza DynamoDB Local y fixtures sintéticos. Comprueba el procedimiento funcional, pero no sustituye los respaldos administrados de AWS.

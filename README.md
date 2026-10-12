@@ -55,6 +55,19 @@ Los índices disponibles son:
 
 DynamoDB Local se ejecuta en el puerto 8000.
 
+## M06 Evolución, auditoría y recuperación
+
+M06 permite la convivencia de eventos CDRL versión 1 y versión 2 mediante normalización al leer.
+
+La solución incluye:
+
+- Validación de `schema_version`.
+- Tabla de auditoría `audit_log`.
+- Respaldo de fixtures sintéticos.
+- Borrado y restauración controlada.
+- Artifacts machine-readable.
+- Evidencia automática de las pruebas.
+
 ```bash
 make setup
 make verify
