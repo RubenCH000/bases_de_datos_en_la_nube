@@ -1,13 +1,46 @@
 {
+  "assignmentId": "M06-auditoria-recuperacion",
   "modulo": "M06 - Auditoría y Recuperación",
   "autor": "David",
-  "fecha": "2026-10-11T23:48:11.426Z",
-  "estado_verificacion": "superado mediante make verify",
-  "pruebas_ejecutadas": [
-    "1. Caso normal: registra exitosamente una acción en el audit_log",
-    "2. Caso límite 1: registra auditoría con metadatos vacíos",
-    "3. Caso límite 2: maneja campos de auditoría extremadamente largos",
-    "4. Fallo declarado: rechaza registrar auditoría si falta el actor"
+  "sourceCommitSha": "43a512edae3e38cdfb5179a9c988ba931a81b856",
+  "fecha": "2026-10-12T01:53:16.938Z",
+  "comando": "node --test tests/m06_auditoria_david.test.js",
+  "duracion_ms": 660,
+  "codigo_salida": 0,
+  "total_pruebas": 4,
+  "aprobadas": 4,
+  "fallidas": 0,
+  "pruebas": [
+    {
+      "nombre": "1. Caso normal: registra exitosamente una acción en el audit_log",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "2. Caso límite 1: registra auditoría con cero documentos afectados",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "3. Caso límite 2: maneja campos de auditoría extremadamente largos",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "4. Fallo declarado: rechaza registrar auditoría si falta el actor",
+      "resultado": "PASS"
+    }
   ],
+  "recuperacion": {
+    "assignmentId": "M06-auditoria-recuperacion",
+    "tabla": "cdrl_eventos",
+    "tabla_auditoria": "audit_log",
+    "actor": "ruben-m06",
+    "fecha_inicio": "2026-10-12T01:53:15.483Z",
+    "fecha_fin": "2026-10-12T01:53:16.051Z",
+    "respaldados": 4,
+    "eliminados": 4,
+    "recuperados": 4,
+    "faltantes": [],
+    "tiempo_ms": 568,
+    "resultado": "exito"
+  },
   "resultado_global": "PASS"
 }

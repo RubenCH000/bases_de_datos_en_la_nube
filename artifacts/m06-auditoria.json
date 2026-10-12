@@ -5,24 +5,24 @@
     {
       "actor": "ruben-m06",
       "accion": "respaldo_fixture_controlado",
-      "fecha": "2026-10-10T15:32:57.777Z",
-      "audit_id": "audit_8367c211-daeb-4131-8c7f-4d5115697d30",
+      "fecha": "2026-10-12T01:53:15.718Z",
+      "audit_id": "audit_2fffa689-ffa3-4589-b416-85b7fc2601ee",
       "documentos_afectados": 4,
       "resultado": "exito"
     },
     {
       "actor": "ruben-m06",
       "accion": "borrado_controlado",
-      "fecha": "2026-10-10T15:32:57.877Z",
-      "audit_id": "audit_ab1626e4-0f64-4521-89e4-4b0b8f6e2a47",
+      "fecha": "2026-10-12T01:53:15.860Z",
+      "audit_id": "audit_4de20125-deab-4d8f-a35b-f31d3d3779e7",
       "documentos_afectados": 4,
       "resultado": "exito"
     },
     {
       "actor": "ruben-m06",
       "accion": "restauracion_controlada",
-      "fecha": "2026-10-10T15:32:57.974Z",
-      "audit_id": "audit_b67a044d-f574-4705-bf3b-ddeb31f14c61",
+      "fecha": "2026-10-12T01:53:16.027Z",
+      "audit_id": "audit_0f3aa421-b5f0-4d23-b3ee-f0fbf29cb2d0",
       "documentos_afectados": 4,
       "resultado": "exito"
     }
