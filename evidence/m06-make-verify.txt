@@ -6,53 +6,53 @@ sin secretos detectados en el arbol versionado
 > cdrl-telemetria@1.0.0 test
 > node --test tests/*.test.js
 
-✔ caso limite: varias lecturas seguidas del mismo sensor (241.3794ms)
-✔ caso limite: un sensor sin lecturas regresa vacio, no error (130.3821ms)
-✔ caso normal: inserta una lectura valida y se puede consultar (170.715ms)
-✔ fallo declarado: un valor fuera de rango se rechaza (151.9824ms)
-✔ M03 normal: writer inserta y reader consulta (138.0786ms)
-✔ M03 migrator puede modificar estructura (29.0933ms)
-✔ M03 operator puede hacer health check (19.1472ms)
-✔ acceso denegado: reader no puede insertar (6.2773ms)
-✔ acceso denegado: writer no puede borrar (4.2894ms)
-✔ acceso denegado: operator no puede leer telemetria (7.363ms)
-✔ M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica (5.3528ms)
-✔ M04 caso limite: insertar un lote vacio no agrega registros ni truena (2.4694ms)
-✔ M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica (2.7084ms)
-✔ M04 fallo declarado: la conexion simulada caida rechaza la insercion (3.2638ms)
+[32m✔ caso limite: varias lecturas seguidas del mismo sensor [90m(121.883349ms)[39m[39m
+[32m✔ caso limite: un sensor sin lecturas regresa vacio, no error [90m(45.155278ms)[39m[39m
+[32m✔ caso normal: inserta una lectura valida y se puede consultar [90m(81.37639ms)[39m[39m
+[32m✔ fallo declarado: un valor fuera de rango se rechaza [90m(47.321746ms)[39m[39m
+[32m✔ M03 normal: writer inserta y reader consulta [90m(49.415999ms)[39m[39m
+[32m✔ M03 migrator puede modificar estructura [90m(17.220382ms)[39m[39m
+[32m✔ M03 operator puede hacer health check [90m(14.480304ms)[39m[39m
+[32m✔ acceso denegado: reader no puede insertar [90m(2.874496ms)[39m[39m
+[32m✔ acceso denegado: writer no puede borrar [90m(3.679835ms)[39m[39m
+[32m✔ acceso denegado: operator no puede leer telemetria [90m(2.65324ms)[39m[39m
+[32m✔ M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica [90m(1.809904ms)[39m[39m
+[32m✔ M04 caso limite: insertar un lote vacio no agrega registros ni truena [90m(1.024336ms)[39m[39m
+[32m✔ M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica [90m(1.354053ms)[39m[39m
+[32m✔ M04 fallo declarado: la conexion simulada caida rechaza la insercion [90m(1.232162ms)[39m[39m
 ▶ M05 - Pruebas de Almacén Documental (DynamoDB)
-  ✔ 1. Caso normal: inserta un documento válido en el almacén (357.2878ms)
-  ✔ 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto (104.3239ms)
-  ✔ 3. Evento que no existe: retorna nulo al buscar por ID (28.7808ms)
-  ✔ 4. Fallo declarado: rechaza un documento inválido (0.8965ms)
-✔ M05 - Pruebas de Almacén Documental (DynamoDB) (494.1626ms)
+  [32m✔ 1. Caso normal: inserta un documento válido en el almacén [90m(169.282689ms)[39m[39m
+  [32m✔ 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto [90m(77.217545ms)[39m[39m
+  [32m✔ 3. Evento que no existe: retorna nulo al buscar por ID [90m(7.037602ms)[39m[39m
+  [32m✔ 4. Fallo declarado: rechaza un documento inválido [90m(0.6372ms)[39m[39m
+[32m✔ M05 - Pruebas de Almacén Documental (DynamoDB) [90m(255.132398ms)[39m[39m
 ▶ M06 - Pruebas de Auditoría y Recuperación (David)
-  ✔ 1. Caso normal: registra exitosamente una acción en el audit_log (457.5092ms)
-  ✔ 2. Caso límite 1: registra auditoría con cero documentos afectados (37.9044ms)
-  ✔ 3. Caso límite 2: maneja campos de auditoría extremadamente largos (28.7488ms)
-  ✔ 4. Fallo declarado: rechaza registrar auditoría si falta el actor (1.2605ms)
-✔ M06 - Pruebas de Auditoría y Recuperación (David) (528.976ms)
+  [32m✔ 1. Caso normal: registra exitosamente una acción en el audit_log [90m(191.817875ms)[39m[39m
+  [32m✔ 2. Caso límite 1: registra auditoría con cero documentos afectados [90m(20.018259ms)[39m[39m
+  [32m✔ 3. Caso límite 2: maneja campos de auditoría extremadamente largos [90m(20.374033ms)[39m[39m
+  [32m✔ 4. Fallo declarado: rechaza registrar auditoría si falta el actor [90m(0.556717ms)[39m[39m
+[32m✔ M06 - Pruebas de Auditoría y Recuperación (David) [90m(233.79989ms)[39m[39m
 ▶ M06 - Evolución del documento de evento (v1 y v2)
-  ✔ 1. Caso normal: los fixtures v1 y v2 son válidos y se leen con la misma forma (4.6189ms)
-  ✔ 2. Caso límite: quality_score acepta exactamente 0 y 1, pero no 1.01 (0.5699ms)
-  ✔ 3. Caso límite: un v1 con campos de v2 se rechaza y un v1 con schema_version 1 explícito se acepta (0.2921ms)
-  ✔ 4. Fallo declarado: schema_version desconocida o v2 incompleto no se aceptan (160.4344ms)
-  ✔ 5. Coexistencia en DynamoDB: un v1 y un v2 del mismo dispositivo se guardan y se leen normalizados (395.6513ms)
-✔ M06 - Evolución del documento de evento (v1 y v2) (563.6592ms)
-ℹ tests 27
-ℹ suites 3
-ℹ pass 27
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 10739.4218
-evidencia M03 generada para 43a512edae3e38cdfb5179a9c988ba931a81b856
+  [32m✔ 1. Caso normal: los fixtures v1 y v2 son válidos y se leen con la misma forma [90m(1.612418ms)[39m[39m
+  [32m✔ 2. Caso límite: quality_score acepta exactamente 0 y 1, pero no 1.01 [90m(0.264755ms)[39m[39m
+  [32m✔ 3. Caso límite: un v1 con campos de v2 se rechaza y un v1 con schema_version 1 explícito se acepta [90m(0.161616ms)[39m[39m
+  [32m✔ 4. Fallo declarado: schema_version desconocida o v2 incompleto no se aceptan [90m(60.691042ms)[39m[39m
+  [32m✔ 5. Coexistencia en DynamoDB: un v1 y un v2 del mismo dispositivo se guardan y se leen normalizados [90m(187.875992ms)[39m[39m
+[32m✔ M06 - Evolución del documento de evento (v1 y v2) [90m(251.667704ms)[39m[39m
+[34mℹ tests 27[39m
+[34mℹ suites 3[39m
+[34mℹ pass 27[39m
+[34mℹ fail 0[39m
+[34mℹ cancelled 0[39m
+[34mℹ skipped 0[39m
+[34mℹ todo 0[39m
+[34mℹ duration_ms 10208.676314[39m
+evidencia M03 generada para 5674c0430334bdcd1e9ab13190eb5e3e24422d10
 [OK] Evidencia JSON generada en artifacts/m05-resultados.json y evidence/m05-pruebas.json
 
 > cdrl-telemetria@1.0.0 m06:recuperacion
 > node scripts/falla_controlada_m06.js
 
-recuperacion M06: 4 recuperados, 0 faltantes, 568 ms
+recuperacion M06: 4 recuperados, 0 faltantes, 294 ms
 [M06] pruebas: 4/4 aprobadas -> evidence/m06-pruebas.json (PASS)
 M06 verificado
