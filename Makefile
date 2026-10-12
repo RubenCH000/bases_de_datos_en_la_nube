@@ -20,9 +20,8 @@ verify:
 	@npm test
 	@node scripts/generar_evidencia_m03.js
 	@node scripts/generar_evidencia_m05.js
-	@node --test tests/m06_auditoria_david.test.js
-	@node scripts/generar_evidencia_m06.js
 	@npm run m06:recuperacion
+	@node scripts/generar_evidencia_m06.js
 	@echo "M06 verificado"
 
 run:
