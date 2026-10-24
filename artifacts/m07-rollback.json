@@ -1,0 +1,23 @@
+{
+  "assignmentId": "M07-evolucion-compatible",
+  "tabla": "cdrl_eventos",
+  "fecha_inicio": "2026-10-24T15:08:02.525Z",
+  "fecha_fin": "2026-10-24T15:08:02.714Z",
+  "respaldados": 3,
+  "restaurados": 3,
+  "eventos_restaurados": [
+    "evt_m07_legacy_001",
+    "evt_m07_legacy_002",
+    "evt_m07_legacy_003"
+  ],
+  "faltantes": [],
+  "diferentes": [],
+  "operacion": {
+    "solicitados": 3,
+    "restaurados": 3,
+    "omitidos": 0,
+    "errores": []
+  },
+  "tiempo_ms": 189,
+  "resultado": "exito"
+}

@@ -15,3 +15,7 @@ docker-data/
 !artifacts/m06-respaldo.json
 !artifacts/m06-recuperacion.json
 !artifacts/m06-auditoria.json
+
+!artifacts/m07-respaldo.json
+!artifacts/m07-migracion.json
+!artifacts/m07-rollback.json
