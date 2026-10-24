@@ -1,0 +1,29 @@
+{
+  "assignmentId": "M07-evolucion-compatible",
+  "tabla": "cdrl_eventos",
+  "generatedAt": "2026-10-24T15:07:16.203Z",
+  "total": 3,
+  "documentos": [
+    {
+      "metric_value": 44.8,
+      "event_id": "evt_m07_legacy_001",
+      "device_id": "NODE-CDRL-M07A",
+      "metric_name": "cpu_temperature",
+      "timestamp": 1790000001000
+    },
+    {
+      "metric_value": 46.1,
+      "event_id": "evt_m07_legacy_002",
+      "device_id": "NODE-CDRL-M07A",
+      "metric_name": "cpu_temperature",
+      "timestamp": 1790000002000
+    },
+    {
+      "metric_value": 12.3,
+      "event_id": "evt_m07_legacy_003",
+      "device_id": "NODE-CDRL-M07B",
+      "metric_name": "battery_voltage",
+      "timestamp": 1790000003000
+    }
+  ]
+}

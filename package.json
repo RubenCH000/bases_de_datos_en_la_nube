@@ -10,6 +10,8 @@
         "m05:tabla": "node scripts/crear_tabla_m05.js",
         "m06:tabla-audit": "node scripts/crear_tabla_audit_m06.js",
         "m06:recuperacion": "node scripts/falla_controlada_m06.js",
+        "m07:migrar": "node scripts/migrar_m07.js",
+        "m07:rollback": "node scripts/rollback_m07.js",
         "test": "node --test tests/*.test.js"
     },
     "dependencies": {

@@ -1,0 +1,31 @@
+{
+  "assignmentId": "M07-evolucion-compatible",
+  "tabla": "cdrl_eventos",
+  "fecha_inicio": "2026-10-24T15:07:15.631Z",
+  "fecha_fin": "2026-10-24T15:07:16.333Z",
+  "fixtures_controlados": 3,
+  "primera_ejecucion": {
+    "revisados": 3,
+    "candidatos": 3,
+    "migrados": 3,
+    "omitidos": 0,
+    "eventos_migrados": [
+      "evt_m07_legacy_001",
+      "evt_m07_legacy_002",
+      "evt_m07_legacy_003"
+    ],
+    "errores": []
+  },
+  "segunda_ejecucion": {
+    "revisados": 3,
+    "candidatos": 0,
+    "migrados": 0,
+    "omitidos": 3,
+    "eventos_migrados": [],
+    "errores": []
+  },
+  "consumidor_anterior_conservado": true,
+  "repetible": true,
+  "tiempo_ms": 702,
+  "resultado": "exito"
+}
