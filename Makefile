@@ -1,5 +1,4 @@
-.PHONY: setup verify run
-
+.PHONY: setup verify run artifact
 setup:
 	@mkdir -p artifacts evidence docs db/migrations db/seed src tests
 	@bash scripts/preparar_env_local.sh
@@ -13,7 +12,6 @@ setup:
 	@npm run m05:tabla
 	@npm run m06:tabla-audit
 	@echo "M06 preparado"
-
 verify:
 	@bash scripts/verify_base.sh
 	@bash scripts/check_no_secrets.sh
@@ -22,7 +20,10 @@ verify:
 	@node scripts/generar_evidencia_m05.js
 	@npm run m06:recuperacion
 	@node scripts/generar_evidencia_m06.js
+	@node scripts/generar_evidencia_m07.js
 	@echo "M06 verificado"
-
 run:
 	@docker compose up
+artifact:
+	@mkdir -p artifacts
+	@node scripts/generar_evidencia_m07.js
