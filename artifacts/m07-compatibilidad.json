@@ -1,0 +1,85 @@
+{
+  "assignmentId": "M07-evolucion-compatible",
+  "modulo": "M07 - Retrocompatibilidad del consumidor v1/v2",
+  "autor": "David",
+  "sourceCommitSha": "f0096c4c4d14a95311573d2196d0d8d07425aab0",
+  "fecha": "2026-10-26T01:10:35.123Z",
+  "fixtures": {
+    "v1": 3,
+    "v2": 3,
+    "mixtos": 6,
+    "invalidos": 2
+  },
+  "resumen_lote_mixto": {
+    "total": 6,
+    "v1": 3,
+    "v2": 3,
+    "adaptados_al_vuelo": 3,
+    "rechazados": 0
+  },
+  "errores_esperados": [
+    {
+      "indice": 0,
+      "event_id": "evt_m07_c_bad_001",
+      "tipo": "EventoNoConsumibleError",
+      "mensaje": "schema_version no soportada: 3"
+    },
+    {
+      "indice": 1,
+      "event_id": "evt_m07_c_bad_002",
+      "tipo": "EventoNoConsumibleError",
+      "mensaje": "documento invalido: falta el campo firmware_version (requerido en schema_version 2); falta el campo quality_score (requerido en schema_version 2)"
+    }
+  ],
+  "comprobaciones": [
+    {
+      "nombre": "hay al menos 3 fixtures v1 y 3 fixtures v2",
+      "resultado": "PASS",
+      "detalle": "v1=3, v2=3"
+    },
+    {
+      "nombre": "el lote mixto se consume completo sin rechazos",
+      "resultado": "PASS",
+      "detalle": "consumidos=6/6"
+    },
+    {
+      "nombre": "todos los eventos salen con estructura v2",
+      "resultado": "PASS",
+      "detalle": ""
+    },
+    {
+      "nombre": "los v1 se adaptan al vuelo con firmware_version y quality_score en null",
+      "resultado": "PASS",
+      "detalle": "adaptados=3"
+    },
+    {
+      "nombre": "los v2 conservan sus valores sin adaptarse",
+      "resultado": "PASS",
+      "detalle": "leidos=3"
+    },
+    {
+      "nombre": "los datos base de cada evento no cambian al adaptarlo",
+      "resultado": "PASS",
+      "detalle": ""
+    },
+    {
+      "nombre": "los documentos originales no se modifican",
+      "resultado": "PASS",
+      "detalle": ""
+    },
+    {
+      "nombre": "consumir solo v1 y solo v2 da el mismo resultado que el lote mixto",
+      "resultado": "PASS",
+      "detalle": ""
+    },
+    {
+      "nombre": "los documentos inválidos se rechazan sin romper el lote",
+      "resultado": "PASS",
+      "detalle": "rechazados=2/2"
+    }
+  ],
+  "total_comprobaciones": 9,
+  "fallidas": 0,
+  "tiempo_ms": 83,
+  "resultado": "exito"
+}

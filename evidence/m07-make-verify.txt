@@ -1,0 +1,78 @@
+CDRL starter base verification passed
+revisando secretos versionados...
+passwords de .env.example estan vacios
+sin secretos detectados en el arbol versionado
+
+> cdrl-telemetria@1.0.0 test
+> node --test tests/*.test.js
+
+✔ caso limite: varias lecturas seguidas del mismo sensor (221.3447ms)
+✔ caso limite: un sensor sin lecturas regresa vacio, no error (111.6704ms)
+✔ caso normal: inserta una lectura valida y se puede consultar (149.6631ms)
+✔ fallo declarado: un valor fuera de rango se rechaza (96.9268ms)
+✔ M03 normal: writer inserta y reader consulta (107.6174ms)
+✔ M03 migrator puede modificar estructura (24.7659ms)
+✔ M03 operator puede hacer health check (23.4035ms)
+✔ acceso denegado: reader no puede insertar (7.0286ms)
+✔ acceso denegado: writer no puede borrar (5.4151ms)
+✔ acceso denegado: operator no puede leer telemetria (7.0551ms)
+✔ M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica (4.9958ms)
+✔ M04 caso limite: insertar un lote vacio no agrega registros ni truena (2.3593ms)
+✔ M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica (2.649ms)
+✔ M04 fallo declarado: la conexion simulada caida rechaza la insercion (4.1224ms)
+▶ M05 - Pruebas de Almacén Documental (DynamoDB)
+  ✔ 1. Caso normal: inserta un documento válido en el almacén (117.2571ms)
+  ✔ 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto (79.4148ms)
+  ✔ 3. Evento que no existe: retorna nulo al buscar por ID (14.5008ms)
+  ✔ 4. Fallo declarado: rechaza un documento inválido (0.8047ms)
+✔ M05 - Pruebas de Almacén Documental (DynamoDB) (214.7407ms)
+▶ M06 - Pruebas de Auditoría y Recuperación (David)
+  ✔ 1. Caso normal: registra exitosamente una acción en el audit_log (190.9262ms)
+  ✔ 2. Caso límite 1: registra auditoría con cero documentos afectados (24.7426ms)
+  ✔ 3. Caso límite 2: maneja campos de auditoría extremadamente largos (27.9006ms)
+  ✔ 4. Fallo declarado: rechaza registrar auditoría si falta el actor (1.4556ms)
+✔ M06 - Pruebas de Auditoría y Recuperación (David) (247.3854ms)
+▶ M06 - Evolución del documento de evento (v1 y v2)
+  ✔ 1. Caso normal: los fixtures v1 y v2 son válidos y se leen con la misma forma (5.2452ms)
+  ✔ 2. Caso límite: quality_score acepta exactamente 0 y 1, pero no 1.01 (0.8226ms)
+  ✔ 3. Caso límite: un v1 con campos de v2 se rechaza y un v1 con schema_version 1 explícito se acepta (0.5377ms)
+  ✔ 4. Fallo declarado: schema_version desconocida o v2 incompleto no se aceptan (113.2489ms)
+  ✔ 5. Coexistencia en DynamoDB: un v1 y un v2 del mismo dispositivo se guardan y se leen normalizados (123.784ms)
+✔ M06 - Evolución del documento de evento (v1 y v2) (247.8579ms)
+▶ M07 - Evolución compatible de documentos
+  ✔ 1. Caso normal: migra los v1 sin versión y el consumidor lee el lote mixto completo (5.5755ms)
+  ✔ 2. Caso límite: correr la migración dos veces no cambia nada la segunda vez (1.4323ms)
+  ✔ 3. Caso límite: el rollback regresa los v1 a su forma original y no toca los v2 (2.69ms)
+  ✔ 4. Fallo declarado: un documento con schema_version 3 o un v2 incompleto no se migra ni se consume (1.3589ms)
+✔ M07 - Evolución compatible de documentos (13.7161ms)
+ℹ tests 31
+ℹ suites 4
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10637.8611
+evidencia M03 generada para f0096c4c4d14a95311573d2196d0d8d07425aab0
+[OK] Evidencia JSON generada en artifacts/m05-resultados.json y evidence/m05-pruebas.json
+
+> cdrl-telemetria@1.0.0 m06:recuperacion
+> node scripts/falla_controlada_m06.js
+
+recuperacion M06: 4 recuperados, 0 faltantes, 432 ms
+[M06] pruebas: 4/4 aprobadas -> evidence/m06-pruebas.json (PASS)
+
+> cdrl-telemetria@1.0.0 m07:migrar
+> node scripts/migrar_m07.js
+
+M07 primera ejecución: 3 migrados
+M07 segunda ejecución: 0 migrados
+M07 compatibilidad anterior: conservada
+
+> cdrl-telemetria@1.0.0 m07:rollback
+> node scripts/rollback_m07.js
+
+M07 rollback: 3 restaurados, 0 faltantes, 0 diferentes
+[M07] compatibilidad v1/v2: 9/9 comprobaciones -> artifacts/m07-compatibilidad.json (exito)
+[M07] pruebas: 4/4 aprobadas -> evidence/m07-pruebas.json (PASS)
+M07 verificado

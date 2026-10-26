@@ -1,8 +1,8 @@
 {
   "assignmentId": "M07-evolucion-compatible",
   "tabla": "cdrl_eventos",
-  "fecha_inicio": "2026-10-24T15:07:15.631Z",
-  "fecha_fin": "2026-10-24T15:07:16.333Z",
+  "fecha_inicio": "2026-10-26T01:10:33.269Z",
+  "fecha_fin": "2026-10-26T01:10:33.554Z",
   "fixtures_controlados": 3,
   "primera_ejecucion": {
     "revisados": 3,
@@ -26,6 +26,6 @@
   },
   "consumidor_anterior_conservado": true,
   "repetible": true,
-  "tiempo_ms": 702,
+  "tiempo_ms": 284,
   "resultado": "exito"
 }

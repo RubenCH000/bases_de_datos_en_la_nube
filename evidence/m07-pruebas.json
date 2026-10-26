@@ -1,0 +1,43 @@
+{
+  "assignmentId": "M07-evolucion-compatible",
+  "modulo": "M07 - Evolución compatible de documentos",
+  "autor": "Maria",
+  "sourceCommitSha": "f0096c4c4d14a95311573d2196d0d8d07425aab0",
+  "fecha": "2026-10-26T01:10:35.645Z",
+  "comando": "node --test tests/m07_compatibilidad.test.js",
+  "duracion_ms": 429,
+  "codigo_salida": 0,
+  "total_pruebas": 4,
+  "aprobadas": 4,
+  "fallidas": 0,
+  "pruebas": [
+    {
+      "nombre": "1. Caso normal: migra los v1 sin versión y el consumidor lee el lote mixto completo",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "2. Caso límite: correr la migración dos veces no cambia nada la segunda vez",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "3. Caso límite: el rollback regresa los v1 a su forma original y no toca los v2",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "4. Fallo declarado: un documento con schema_version 3 o un v2 incompleto no se migra ni se consume",
+      "resultado": "PASS"
+    }
+  ],
+  "criterios": {
+    "version_anterior_legible": true,
+    "migracion_repetible": true,
+    "consumidor_anterior_conservado": true,
+    "rollback_probado": true
+  },
+  "artifacts": {
+    "m07-migracion.json": "exito",
+    "m07-rollback.json": "exito",
+    "m07-compatibilidad.json": "exito"
+  },
+  "resultado_global": "PASS"
+}
