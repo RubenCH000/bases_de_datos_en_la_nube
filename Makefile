@@ -28,6 +28,7 @@ verify:
 	@node scripts/generar_evidencia_m07.js
 	@node scripts/generar_evidencia_m07_pruebas.js
 	@node scripts/benchmark_m08.js
+	@node scripts/generar_evidencia_m08_pruebas.js
 	@echo "M08 verificado"
 
 run:
