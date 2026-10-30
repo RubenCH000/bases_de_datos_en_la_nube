@@ -1,0 +1,61 @@
+{
+  "assignmentId": "M08-indices-paginacion",
+  "modulo": "M08 - Paginación, índices y rendimiento",
+  "autor": "Maria",
+  "sourceCommitSha": "afd2bdd10f61cb8cc1159d155b8f20455ee72b4c",
+  "fecha": "2026-10-30T21:16:07.366Z",
+  "comando": "node --test tests/m08_paginacion.test.js",
+  "duracion_ms": 476,
+  "codigo_salida": 0,
+  "total_pruebas": 4,
+  "aprobadas": 4,
+  "fallidas": 0,
+  "pruebas": [
+    {
+      "nombre": "1. Caso normal: recorre los 120 eventos del dispositivo en páginas de 25 sin repetir ni saltar",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "2. Caso límite: un evento nuevo que llega a mitad del recorrido no cambia las páginas siguientes",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "3. Caso límite: límites 1 y 100, dispositivo sin eventos y límites fuera de rango",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "4. Fallo declarado: un cursor inválido se rechaza con CursorInvalidoError sin llegar a DynamoDB",
+      "resultado": "PASS"
+    }
+  ],
+  "criterios": {
+    "paginacion_estable_sin_duplicados": true,
+    "cursor_invalido_rechazado": true,
+    "benchmark_con_p50_p95": true,
+    "linea_base_vs_indice": true,
+    "entorno_y_muestra_declarados": true
+  },
+  "paginacion_contra_dynamodb_local": {
+    "paginas_recorridas": 5,
+    "eventos_recuperados": 120,
+    "eventos_unicos": 120
+  },
+  "benchmark": {
+    "resultado": "exito",
+    "entorno": "local (Docker / DynamoDB Local)",
+    "tamano_muestra": 30,
+    "limite_pagina": 25,
+    "scan_sin_indice": {
+      "p50_ms": 33.294,
+      "p95_ms": 38.527,
+      "items_evaluados_por_consulta": 395
+    },
+    "query_con_indice": {
+      "p50_ms": 7.347,
+      "p95_ms": 8.468,
+      "items_evaluados_por_consulta": 25
+    },
+    "mejora": "Query con índice (gsi_device_timestamp) mejoró p50 en 77.93% (33.294 ms -> 7.347 ms, 4.53x) y p95 en 78.02% (38.527 ms -> 8.468 ms), reduciendo los documentos evaluados en 93.67% (395 -> 25 por consulta)."
+  },
+  "resultado_global": "PASS"
+}

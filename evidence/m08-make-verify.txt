@@ -1,0 +1,91 @@
+CDRL starter base verification passed
+revisando secretos versionados...
+passwords de .env.example estan vacios
+sin secretos detectados en el arbol versionado
+
+> cdrl-telemetria@1.0.0 test
+> node --test tests/*.test.js
+
+✔ caso limite: varias lecturas seguidas del mismo sensor (258.9967ms)
+✔ caso limite: un sensor sin lecturas regresa vacio, no error (137.6682ms)
+✔ caso normal: inserta una lectura valida y se puede consultar (188.7696ms)
+✔ fallo declarado: un valor fuera de rango se rechaza (152.8311ms)
+✔ M03 normal: writer inserta y reader consulta (153.2064ms)
+✔ M03 migrator puede modificar estructura (24.8844ms)
+✔ M03 operator puede hacer health check (18.3344ms)
+✔ acceso denegado: reader no puede insertar (7.9386ms)
+✔ acceso denegado: writer no puede borrar (7.9303ms)
+✔ acceso denegado: operator no puede leer telemetria (8.4414ms)
+✔ M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica (6.579ms)
+✔ M04 caso limite: insertar un lote vacio no agrega registros ni truena (4.4845ms)
+✔ M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica (1.3211ms)
+✔ M04 fallo declarado: la conexion simulada caida rechaza la insercion (1.5ms)
+▶ M05 - Pruebas de Almacén Documental (DynamoDB)
+  ✔ 1. Caso normal: inserta un documento válido en el almacén (120.1153ms)
+  ✔ 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto (48.637ms)
+  ✔ 3. Evento que no existe: retorna nulo al buscar por ID (18.6872ms)
+  ✔ 4. Fallo declarado: rechaza un documento inválido (4.0019ms)
+✔ M05 - Pruebas de Almacén Documental (DynamoDB) (195.0084ms)
+▶ M06 - Pruebas de Auditoría y Recuperación (David)
+  ✔ 1. Caso normal: registra exitosamente una acción en el audit_log (149.3598ms)
+  ✔ 2. Caso límite 1: registra auditoría con cero documentos afectados (20.8112ms)
+  ✔ 3. Caso límite 2: maneja campos de auditoría extremadamente largos (20.5125ms)
+  ✔ 4. Fallo declarado: rechaza registrar auditoría si falta el actor (3.191ms)
+✔ M06 - Pruebas de Auditoría y Recuperación (David) (196.946ms)
+▶ M06 - Evolución del documento de evento (v1 y v2)
+  ✔ 1. Caso normal: los fixtures v1 y v2 son válidos y se leen con la misma forma (2.9165ms)
+  ✔ 2. Caso límite: quality_score acepta exactamente 0 y 1, pero no 1.01 (0.6488ms)
+  ✔ 3. Caso límite: un v1 con campos de v2 se rechaza y un v1 con schema_version 1 explícito se acepta (0.4617ms)
+  ✔ 4. Fallo declarado: schema_version desconocida o v2 incompleto no se aceptan (99.2981ms)
+  ✔ 5. Coexistencia en DynamoDB: un v1 y un v2 del mismo dispositivo se guardan y se leen normalizados (104.6262ms)
+✔ M06 - Evolución del documento de evento (v1 y v2) (210.0786ms)
+▶ M07 - Evolución compatible de documentos
+  ✔ 1. Caso normal: migra los v1 sin versión y el consumidor lee el lote mixto completo (5.5887ms)
+  ✔ 2. Caso límite: correr la migración dos veces no cambia nada la segunda vez (1.1895ms)
+  ✔ 3. Caso límite: el rollback regresa los v1 a su forma original y no toca los v2 (2.334ms)
+  ✔ 4. Fallo declarado: un documento con schema_version 3 o un v2 incompleto no se migra ni se consume (1.5311ms)
+✔ M07 - Evolución compatible de documentos (13.1332ms)
+▶ M08 - Paginación estable de eventos
+  ✔ 1. Caso normal: recorre los 120 eventos del dispositivo en páginas de 25 sin repetir ni saltar (24.804ms)
+  ✔ 2. Caso límite: un evento nuevo que llega a mitad del recorrido no cambia las páginas siguientes (8.291ms)
+  ✔ 3. Caso límite: límites 1 y 100, dispositivo sin eventos y límites fuera de rango (5.517ms)
+  ✔ 4. Fallo declarado: un cursor inválido se rechaza con CursorInvalidoError sin llegar a DynamoDB (4.6749ms)
+✔ M08 - Paginación estable de eventos (45.9111ms)
+ℹ tests 35
+ℹ suites 5
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11032.3659
+evidencia M03 generada para afd2bdd10f61cb8cc1159d155b8f20455ee72b4c
+[OK] Evidencia JSON generada en artifacts/m05-resultados.json y evidence/m05-pruebas.json
+
+> cdrl-telemetria@1.0.0 m06:recuperacion
+> node scripts/falla_controlada_m06.js
+
+recuperacion M06: 4 recuperados, 0 faltantes, 334 ms
+[M06] pruebas: 4/4 aprobadas -> evidence/m06-pruebas.json (PASS)
+
+> cdrl-telemetria@1.0.0 m07:migrar
+> node scripts/migrar_m07.js
+
+M07 primera ejecución: 3 migrados
+M07 segunda ejecución: 0 migrados
+M07 compatibilidad anterior: conservada
+
+> cdrl-telemetria@1.0.0 m07:rollback
+> node scripts/rollback_m07.js
+
+M07 rollback: 3 restaurados, 0 faltantes, 0 diferentes
+[M07] compatibilidad v1/v2: 9/9 comprobaciones -> artifacts/m07-compatibilidad.json (exito)
+[M07] pruebas: 4/4 aprobadas -> evidence/m07-pruebas.json (PASS)
+[M08] Entorno: local (Docker / DynamoDB Local) | Node v24.19.0
+[M08] Muestra: 30 iteraciones | Fixtures M08: 360 eventos
+[M08] Línea base (Scan sin índice): p50=33.294 ms, p95=38.527 ms (395 docs evaluados/consulta)
+[M08] Optimizada (Query GSI + paginación): p50=7.347 ms, p95=8.468 ms (25 docs evaluados/consulta)
+[M08] Mejora: Query con índice (gsi_device_timestamp) mejoró p50 en 77.93% (33.294 ms -> 7.347 ms, 4.53x) y p95 en 78.02% (38.527 ms -> 8.468 ms), reduciendo los documentos evaluados en 93.67% (395 -> 25 por consulta).
+[M08] Artefacto generado en artifacts/m08-benchmark.json
+[M08] pruebas: 4/4 aprobadas -> evidence/m08-pruebas.json (PASS)
+M08 verificado

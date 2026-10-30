@@ -51,10 +51,10 @@ Entorno: DynamoDB Local en Docker, Node v24.19.0, Windows. Muestra: 30 iteracion
 
 | Consulta | p50 | p95 | Documentos evaluados por consulta |
 |---|---|---|---|
-| Línea base: `Scan` + `FilterExpression` | 44.301 ms | 59.423 ms | 391 |
-| `Query` en `gsi_device_timestamp` + cursor | 6.863 ms | 9.423 ms | 25 |
+| Línea base: `Scan` + `FilterExpression` | 33.294 ms | 38.527 ms | 395 |
+| `Query` en `gsi_device_timestamp` + cursor | 7.347 ms | 8.468 ms | 25 |
 
-El índice bajó el p50 un 84.51 % (6.46 veces más rápido), el p95 un 84.14 % y los documentos leídos un 93.61 %. La línea base lee toda la tabla aunque solo regrese 25 eventos, así que su costo seguiría creciendo con la tabla; el `Query` lee solo la página.
+El índice bajó el p50 un 77.93 % (4.53 veces más rápido), el p95 un 78.02 % y los documentos leídos un 93.67 %. La línea base lee toda la tabla aunque solo regrese 25 eventos, así que su costo seguiría creciendo con la tabla; el `Query` lee solo la página.
 
 | Criterio | Dónde se comprueba | Resultado |
 |---|---|---|
