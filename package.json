@@ -13,7 +13,8 @@
         "m07:migrar": "node scripts/migrar_m07.js",
         "m07:rollback": "node scripts/rollback_m07.js",
         "m08:fixtures": "node scripts/cargar_fixtures_m08.js",
-        "test": "node --test tests/*.test.js"
+        "test": "node --test tests/*.test.js",
+        "m09:remediacion": "node scripts/remediacion_m09.js"
     },
     "dependencies": {
         "@aws-sdk/client-dynamodb": "^3.1146.0",
