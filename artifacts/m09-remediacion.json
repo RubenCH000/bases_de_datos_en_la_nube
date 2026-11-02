@@ -1,0 +1,56 @@
+{
+  "assignmentId": "M09-seguridad-nosql-auditoria",
+  "fecha_inicio": "2026-11-02T21:51:35.989Z",
+  "fecha_fin": "2026-11-02T21:51:36.098Z",
+  "tabla_eventos": "cdrl_eventos",
+  "tabla_auditoria": "audit_log",
+  "vulnerabilidad_inicial": {
+    "descripcion": "el rol lector tenía permiso de escritura",
+    "escritura_indebida_permitida": true
+  },
+  "remediacion": {
+    "descripcion": "se retiró put del rol lector y se aplicó mínimo privilegio",
+    "escritura_no_autorizada_denegada": true,
+    "lectura_no_autorizada_denegada": true
+  },
+  "auditoria": {
+    "total_eventos": 3,
+    "campos_requeridos": [
+      "actor",
+      "accion",
+      "recurso",
+      "resultado"
+    ],
+    "contiene_secretos": false,
+    "eventos": [
+      {
+        "audit_id": "audit_7e92c3bd-d8e8-4f53-b8ed-544a18245991",
+        "actor": "ruben-m09-lector",
+        "accion": "put",
+        "recurso": "cdrl_eventos",
+        "fecha": "2026-11-02T21:51:36.043Z",
+        "documentos_afectados": 1,
+        "resultado": "exito"
+      },
+      {
+        "audit_id": "audit_140cca60-c4a0-4be7-84df-6ccc106e152a",
+        "actor": "ruben-m09-lector",
+        "accion": "put",
+        "recurso": "cdrl_eventos",
+        "fecha": "2026-11-02T21:51:36.052Z",
+        "documentos_afectados": 0,
+        "resultado": "denegado"
+      },
+      {
+        "audit_id": "audit_4c000555-8865-4593-a951-e03a8c620646",
+        "actor": "ruben-m09-escritor",
+        "accion": "get",
+        "recurso": "cdrl_eventos",
+        "fecha": "2026-11-02T21:51:36.060Z",
+        "documentos_afectados": 0,
+        "resultado": "denegado"
+      }
+    ]
+  },
+  "resultado": "exito"
+}

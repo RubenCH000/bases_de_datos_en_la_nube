@@ -20,3 +20,4 @@ docker-data/
 !artifacts/m07-migracion.json
 !artifacts/m07-rollback.json
 !artifacts/m07-compatibilidad.json
+!artifacts/m09-remediacion.json
