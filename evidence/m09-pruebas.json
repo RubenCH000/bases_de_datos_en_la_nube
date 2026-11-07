@@ -1,0 +1,63 @@
+{
+  "assignmentId": "M09-seguridad-nosql-auditoria",
+  "modulo": "M09 - Seguridad NoSQL y auditoría",
+  "autor": "Maria",
+  "sourceCommitSha": "d93f3591cd2dca820d96836f7fdf1fe100ad56f4",
+  "fecha": "2026-11-07T10:02:15.091Z",
+  "comando": "node --test tests/m09_seguridad.test.js",
+  "duracion_ms": 401,
+  "codigo_salida": 0,
+  "total_pruebas": 6,
+  "aprobadas": 6,
+  "fallidas": 0,
+  "pruebas": [
+    {
+      "nombre": "1. caso normal: cada rol hace lo suyo y queda auditado con actor, acción, recurso y resultado",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "2. caso límite: mínimo privilegio, cada rol solo tiene las acciones de su colección",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "3. caso límite: abuso de lectura y escritura se niega antes de tocar DynamoDB y se audita como denegado",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "4. remediación: la política insegura dejaba escribir al lector y la segura lo niega",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "5. sin secretos: la auditoría guarda solo metadatos aunque el documento traiga datos sensibles",
+      "resultado": "PASS"
+    },
+    {
+      "nombre": "6. fallo declarado: si la base o la auditoría fallan, el error no se oculta y queda rastro",
+      "resultado": "PASS"
+    }
+  ],
+  "criterios": {
+    "lecturas_no_autorizadas_fallan": true,
+    "escrituras_no_autorizadas_fallan": true,
+    "minimo_privilegio_por_coleccion_y_operacion": true,
+    "eventos_con_actor_accion_recurso_resultado": true,
+    "auditoria_sin_secretos": true,
+    "remediacion_documentada_y_probada": true,
+    "fallo_declarado_no_se_oculta": true
+  },
+  "remediacion_contra_dynamodb_local": {
+    "resultado": "exito",
+    "vulnerabilidad_inicial": "el rol lector tenía permiso de escritura",
+    "remediacion": "se retiró put del rol lector y se aplicó mínimo privilegio",
+    "escritura_no_autorizada_denegada": true,
+    "lectura_no_autorizada_denegada": true,
+    "eventos_auditados": 3,
+    "resultados_auditados": [
+      "ruben-m09-lector put -> exito",
+      "ruben-m09-lector put -> denegado",
+      "ruben-m09-escritor get -> denegado"
+    ],
+    "auditoria_contiene_secretos": false
+  },
+  "resultado_global": "PASS"
+}
