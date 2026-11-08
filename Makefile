@@ -13,7 +13,7 @@ setup:
 	@npm run m05:tabla
 	@npm run m06:tabla-audit
 	@npm run m08:fixtures
-	@echo "M08 preparado"
+	@echo "M09 preparado"
 
 verify:
 	@bash scripts/verify_base.sh
@@ -29,7 +29,9 @@ verify:
 	@node scripts/generar_evidencia_m07_pruebas.js
 	@node scripts/benchmark_m08.js
 	@node scripts/generar_evidencia_m08_pruebas.js
-	@echo "M08 verificado"
+	@npm run m09:remediacion
+	@node scripts/generar_evidencia_m09_pruebas.js
+	@echo "M09 verificado"
 
 run:
 	@docker compose up
@@ -38,3 +40,4 @@ artifact:
 	@mkdir -p artifacts
 	@node scripts/generar_evidencia_m07.js
 	@node scripts/benchmark_m08.js
+	@npm run m09:remediacion
