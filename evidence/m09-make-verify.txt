@@ -1,0 +1,388 @@
+CDRL starter base verification passed
+revisando secretos versionados...
+sin secretos detectados en el arbol versionado
+
+> cdrl-telemetria@1.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: caso limite: varias lecturas seguidas del mismo sensor
+ok 1 - caso limite: varias lecturas seguidas del mismo sensor
+  ---
+  duration_ms: 2370.6147
+  ...
+# Subtest: caso limite: un sensor sin lecturas regresa vacio, no error
+ok 2 - caso limite: un sensor sin lecturas regresa vacio, no error
+  ---
+  duration_ms: 1267.8003
+  ...
+# Subtest: caso normal: inserta una lectura valida y se puede consultar
+ok 3 - caso normal: inserta una lectura valida y se puede consultar
+  ---
+  duration_ms: 1737.2971
+  ...
+# Subtest: fallo declarado: un valor fuera de rango se rechaza
+ok 4 - fallo declarado: un valor fuera de rango se rechaza
+  ---
+  duration_ms: 1242.5017
+  ...
+# Subtest: M03 normal: writer inserta y reader consulta
+ok 5 - M03 normal: writer inserta y reader consulta
+  ---
+  duration_ms: 1697.4097
+  ...
+# Subtest: M03 migrator puede modificar estructura
+ok 6 - M03 migrator puede modificar estructura
+  ---
+  duration_ms: 167.564
+  ...
+# Subtest: M03 operator puede hacer health check
+ok 7 - M03 operator puede hacer health check
+  ---
+  duration_ms: 134.0386
+  ...
+# Subtest: acceso denegado: reader no puede insertar
+ok 8 - acceso denegado: reader no puede insertar
+  ---
+  duration_ms: 25.1369
+  ...
+# Subtest: acceso denegado: writer no puede borrar
+ok 9 - acceso denegado: writer no puede borrar
+  ---
+  duration_ms: 42.6295
+  ...
+# Subtest: acceso denegado: operator no puede leer telemetria
+ok 10 - acceso denegado: operator no puede leer telemetria
+  ---
+  duration_ms: 25.1658
+  ...
+# Subtest: M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica
+ok 11 - M04 caso limite: un volumen alto de eventos no rompe el store, pero tampoco deduplica
+  ---
+  duration_ms: 42.1424
+  ...
+# Subtest: M04 caso limite: insertar un lote vacio no agrega registros ni truena
+ok 12 - M04 caso limite: insertar un lote vacio no agrega registros ni truena
+  ---
+  duration_ms: 9.7513
+  ...
+# Subtest: M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica
+ok 13 - M04 caso normal: inserta los eventos CDRL y calcula el promedio por metrica
+  ---
+  duration_ms: 13.2315
+  ...
+# Subtest: M04 fallo declarado: la conexion simulada caida rechaza la insercion
+ok 14 - M04 fallo declarado: la conexion simulada caida rechaza la insercion
+  ---
+  duration_ms: 7.8168
+  ...
+# (node:11304) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+# versions published after the first week of January 2027
+# will require node >=22. You are running node v20.19.4.
+# To continue receiving updates to AWS services, bug fixes,
+# and security updates please upgrade to node >=22.
+# More information can be found at: https://a.co/c895JFp
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M05 - Pruebas de Almacén Documental (DynamoDB)
+    # Subtest: 1. Caso normal: inserta un documento válido en el almacén
+    ok 1 - 1. Caso normal: inserta un documento válido en el almacén
+      ---
+      duration_ms: 1506.2565
+      ...
+    # Subtest: 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto
+    ok 2 - 2. Caso duplicado: lanza error al insertar un event_id con contenido distinto
+      ---
+      duration_ms: 227.774
+      ...
+    # Subtest: 3. Evento que no existe: retorna nulo al buscar por ID
+    ok 3 - 3. Evento que no existe: retorna nulo al buscar por ID
+      ---
+      duration_ms: 20.5762
+      ...
+    # Subtest: 4. Fallo declarado: rechaza un documento inválido
+    ok 4 - 4. Fallo declarado: rechaza un documento inválido
+      ---
+      duration_ms: 2.1423
+      ...
+    1..4
+ok 15 - M05 - Pruebas de Almacén Documental (DynamoDB)
+  ---
+  duration_ms: 1766.5716
+  type: 'suite'
+  ...
+# (node:14928) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+# versions published after the first week of January 2027
+# will require node >=22. You are running node v20.19.4.
+# To continue receiving updates to AWS services, bug fixes,
+# and security updates please upgrade to node >=22.
+# More information can be found at: https://a.co/c895JFp
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M06 - Pruebas de Auditoría y Recuperación (David)
+    # Subtest: 1. Caso normal: registra exitosamente una acción en el audit_log
+    ok 1 - 1. Caso normal: registra exitosamente una acción en el audit_log
+      ---
+      duration_ms: 1638.5244
+      ...
+    # Subtest: 2. Caso límite 1: registra auditoría con cero documentos afectados
+    ok 2 - 2. Caso límite 1: registra auditoría con cero documentos afectados
+      ---
+      duration_ms: 51.7305
+      ...
+    # Subtest: 3. Caso límite 2: maneja campos de auditoría extremadamente largos
+    ok 3 - 3. Caso límite 2: maneja campos de auditoría extremadamente largos
+      ---
+      duration_ms: 62.99
+      ...
+    # Subtest: 4. Fallo declarado: rechaza registrar auditoría si falta el actor
+    ok 4 - 4. Fallo declarado: rechaza registrar auditoría si falta el actor
+      ---
+      duration_ms: 2.823
+      ...
+    1..4
+ok 16 - M06 - Pruebas de Auditoría y Recuperación (David)
+  ---
+  duration_ms: 1763.5068
+  type: 'suite'
+  ...
+# (node:18544) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+# versions published after the first week of January 2027
+# will require node >=22. You are running node v20.19.4.
+# To continue receiving updates to AWS services, bug fixes,
+# and security updates please upgrade to node >=22.
+# More information can be found at: https://a.co/c895JFp
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M06 - Evolución del documento de evento (v1 y v2)
+    # Subtest: 1. Caso normal: los fixtures v1 y v2 son válidos y se leen con la misma forma
+    ok 1 - 1. Caso normal: los fixtures v1 y v2 son válidos y se leen con la misma forma
+      ---
+      duration_ms: 12.7896
+      ...
+    # Subtest: 2. Caso límite: quality_score acepta exactamente 0 y 1, pero no 1.01
+    ok 2 - 2. Caso límite: quality_score acepta exactamente 0 y 1, pero no 1.01
+      ---
+      duration_ms: 1.5863
+      ...
+    # Subtest: 3. Caso límite: un v1 con campos de v2 se rechaza y un v1 con schema_version 1 explícito se acepta
+    ok 3 - 3. Caso límite: un v1 con campos de v2 se rechaza y un v1 con schema_version 1 explícito se acepta
+      ---
+      duration_ms: 9.0503
+      ...
+    # Subtest: 4. Fallo declarado: schema_version desconocida o v2 incompleto no se aceptan
+    ok 4 - 4. Fallo declarado: schema_version desconocida o v2 incompleto no se aceptan
+      ---
+      duration_ms: 1305.8979
+      ...
+    # Subtest: 5. Coexistencia en DynamoDB: un v1 y un v2 del mismo dispositivo se guardan y se leen normalizados
+    ok 5 - 5. Coexistencia en DynamoDB: un v1 y un v2 del mismo dispositivo se guardan y se leen normalizados
+      ---
+      duration_ms: 364.1819
+      ...
+    1..5
+ok 17 - M06 - Evolución del documento de evento (v1 y v2)
+  ---
+  duration_ms: 1700.9523
+  type: 'suite'
+  ...
+# (node:6684) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+# versions published after the first week of January 2027
+# will require node >=22. You are running node v20.19.4.
+# To continue receiving updates to AWS services, bug fixes,
+# and security updates please upgrade to node >=22.
+# More information can be found at: https://a.co/c895JFp
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M07 - Evolución compatible de documentos
+    # Subtest: 1. Caso normal: migra los v1 sin versión y el consumidor lee el lote mixto completo
+    ok 1 - 1. Caso normal: migra los v1 sin versión y el consumidor lee el lote mixto completo
+      ---
+      duration_ms: 65.5547
+      ...
+    # Subtest: 2. Caso límite: correr la migración dos veces no cambia nada la segunda vez
+    ok 2 - 2. Caso límite: correr la migración dos veces no cambia nada la segunda vez
+      ---
+      duration_ms: 4.2256
+      ...
+    # Subtest: 3. Caso límite: el rollback regresa los v1 a su forma original y no toca los v2
+    ok 3 - 3. Caso límite: el rollback regresa los v1 a su forma original y no toca los v2
+      ---
+      duration_ms: 6.0592
+      ...
+    # Subtest: 4. Fallo declarado: un documento con schema_version 3 o un v2 incompleto no se migra ni se consume
+    ok 4 - 4. Fallo declarado: un documento con schema_version 3 o un v2 incompleto no se migra ni se consume
+      ---
+      duration_ms: 5.3034
+      ...
+    1..4
+ok 18 - M07 - Evolución compatible de documentos
+  ---
+  duration_ms: 88.3401
+  type: 'suite'
+  ...
+# (node:16856) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+# versions published after the first week of January 2027
+# will require node >=22. You are running node v20.19.4.
+# To continue receiving updates to AWS services, bug fixes,
+# and security updates please upgrade to node >=22.
+# More information can be found at: https://a.co/c895JFp
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M08 - Paginación estable de eventos
+    # Subtest: 1. Caso normal: recorre los 120 eventos del dispositivo en páginas de 25 sin repetir ni saltar
+    ok 1 - 1. Caso normal: recorre los 120 eventos del dispositivo en páginas de 25 sin repetir ni saltar
+      ---
+      duration_ms: 92.8448
+      ...
+    # Subtest: 2. Caso límite: un evento nuevo que llega a mitad del recorrido no cambia las páginas siguientes
+    ok 2 - 2. Caso límite: un evento nuevo que llega a mitad del recorrido no cambia las páginas siguientes
+      ---
+      duration_ms: 22.2489
+      ...
+    # Subtest: 3. Caso límite: límites 1 y 100, dispositivo sin eventos y límites fuera de rango
+    ok 3 - 3. Caso límite: límites 1 y 100, dispositivo sin eventos y límites fuera de rango
+      ---
+      duration_ms: 46.9754
+      ...
+    # Subtest: 4. Fallo declarado: un cursor inválido se rechaza con CursorInvalidoError sin llegar a DynamoDB
+    ok 4 - 4. Fallo declarado: un cursor inválido se rechaza con CursorInvalidoError sin llegar a DynamoDB
+      ---
+      duration_ms: 10.1835
+      ...
+    1..4
+ok 19 - M08 - Paginación estable de eventos
+  ---
+  duration_ms: 178.0896
+  type: 'suite'
+  ...
+# (node:15844) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+# versions published after the first week of January 2027
+# will require node >=22. You are running node v20.19.4.
+# To continue receiving updates to AWS services, bug fixes,
+# and security updates please upgrade to node >=22.
+# More information can be found at: https://a.co/c895JFp
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M09 seguridad NoSQL y auditoría
+    # Subtest: 1. caso normal: cada rol hace lo suyo y queda auditado con actor, acción, recurso y resultado
+    ok 1 - 1. caso normal: cada rol hace lo suyo y queda auditado con actor, acción, recurso y resultado
+      ---
+      duration_ms: 11.5237
+      ...
+    # Subtest: 2. caso límite: mínimo privilegio, cada rol solo tiene las acciones de su colección
+    ok 2 - 2. caso límite: mínimo privilegio, cada rol solo tiene las acciones de su colección
+      ---
+      duration_ms: 4.0545
+      ...
+    # Subtest: 3. caso límite: abuso de lectura y escritura se niega antes de tocar DynamoDB y se audita como denegado
+    ok 3 - 3. caso límite: abuso de lectura y escritura se niega antes de tocar DynamoDB y se audita como denegado
+      ---
+      duration_ms: 5.4615
+      ...
+    # Subtest: 4. remediación: la política insegura dejaba escribir al lector y la segura lo niega
+    ok 4 - 4. remediación: la política insegura dejaba escribir al lector y la segura lo niega
+      ---
+      duration_ms: 4.3446
+      ...
+    # Subtest: 5. sin secretos: la auditoría guarda solo metadatos aunque el documento traiga datos sensibles
+    ok 5 - 5. sin secretos: la auditoría guarda solo metadatos aunque el documento traiga datos sensibles
+      ---
+      duration_ms: 2.8383
+      ...
+    # Subtest: 6. fallo declarado: si la base o la auditoría fallan, el error no se oculta y queda rastro
+    ok 6 - 6. fallo declarado: si la base o la auditoría fallan, el error no se oculta y queda rastro
+      ---
+      duration_ms: 2.6305
+      ...
+    1..6
+ok 20 - M09 seguridad NoSQL y auditoría
+  ---
+  duration_ms: 37.8014
+  type: 'suite'
+  ...
+1..20
+# tests 41
+# suites 6
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13693.3982
+evidencia M03 generada para 40c64bf3b6cc60644af490ead8b787e407ff8f1b
+[OK] Evidencia JSON generada en artifacts/m05-resultados.json y evidence/m05-pruebas.json
+
+> cdrl-telemetria@1.0.0 m06:recuperacion
+> node scripts/falla_controlada_m06.js
+
+(node:2528) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+versions published after the first week of January 2027
+will require node >=22. You are running node v20.19.4.
+
+To continue receiving updates to AWS services, bug fixes,
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+recuperacion M06: 4 recuperados, 0 faltantes, 986 ms
+[M06] pruebas: 4/4 aprobadas -> evidence/m06-pruebas.json (PASS)
+
+> cdrl-telemetria@1.0.0 m07:migrar
+> node scripts/migrar_m07.js
+
+(node:14644) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+versions published after the first week of January 2027
+will require node >=22. You are running node v20.19.4.
+
+To continue receiving updates to AWS services, bug fixes,
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+M07 primera ejecución: 3 migrados
+M07 segunda ejecución: 0 migrados
+M07 compatibilidad anterior: conservada
+
+> cdrl-telemetria@1.0.0 m07:rollback
+> node scripts/rollback_m07.js
+
+(node:2680) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+versions published after the first week of January 2027
+will require node >=22. You are running node v20.19.4.
+
+To continue receiving updates to AWS services, bug fixes,
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+M07 rollback: 3 restaurados, 0 faltantes, 0 diferentes
+[M07] compatibilidad v1/v2: 9/9 comprobaciones -> artifacts/m07-compatibilidad.json (exito)
+[M07] pruebas: 4/4 aprobadas -> evidence/m07-pruebas.json (PASS)
+(node:12000) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+versions published after the first week of January 2027
+will require node >=22. You are running node v20.19.4.
+
+To continue receiving updates to AWS services, bug fixes,
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+[M08] Entorno: local (Docker / DynamoDB Local) | Node v20.19.4
+[M08] Muestra: 30 iteraciones | Fixtures M08: 360 eventos
+[M08] Línea base (Scan sin índice): p50=56.382 ms, p95=73.06 ms (375 docs evaluados/consulta)
+[M08] Optimizada (Query GSI + paginación): p50=9.006 ms, p95=11.691 ms (25 docs evaluados/consulta)
+[M08] Mejora: Query con índice (gsi_device_timestamp) mejoró p50 en 84.03% (56.382 ms -> 9.006 ms, 6.26x) y p95 en 84% (73.06 ms -> 11.691 ms), reduciendo los documentos evaluados en 93.33% (375 -> 25 por consulta).
+[M08] Artefacto generado en artifacts/m08-benchmark.json
+[M08] pruebas: 4/4 aprobadas -> evidence/m08-pruebas.json (PASS)
+
+> cdrl-telemetria@1.0.0 m09:remediacion
+> node scripts/remediacion_m09.js
+
+(node:3884) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+versions published after the first week of January 2027
+will require node >=22. You are running node v20.19.4.
+
+To continue receiving updates to AWS services, bug fixes,
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+M09 remediación: exito
+M09 auditorías registradas: 3
+[M09] pruebas: 6/6 aprobadas -> evidence/m09-pruebas.json (PASS)
+M09 verificado
